@@ -2,6 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const connection = require("../config/db");
+const userRoute = require("../routes/userRoutes");
+const errorHandler = require("../middelware/errorHandler");
+const logger = require("../middelware/logger");
+const requstTime = require("../middelware/requstTime");
 const app = express();
 
 // Middleware
@@ -10,13 +14,20 @@ connection.connect((err) => {
     console.error(err);
     return;
   }
-  console.log("database connect")
+  console.log("database connect");
 });
+
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(errorHandler);
+app.use(logger);
+app.use(requstTime);
 
-app.listen(8000, () => {
-  console.log("Server Starting, In Port 8000");
+// Router
+app.use("/api", userRoute);
+
+app.listen(process.env.SERVER_PORT, () => {
+  console.log("Server Starting");
 });

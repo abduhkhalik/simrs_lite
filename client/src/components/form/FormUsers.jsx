@@ -1,4 +1,4 @@
-import { Input, Option, Select } from "@material-tailwind/react";
+import { Button, Input, Option, Select } from "@material-tailwind/react";
 
 export const FormUsers = () => {
   return (
@@ -13,6 +13,7 @@ export const FormUsers = () => {
           <Option></Option>
         </Select>
       </div>
+      <Button onClick={() => {}}>Submit</Button>
     </form>
   );
 };
