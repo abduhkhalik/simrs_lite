@@ -16,7 +16,7 @@ const TABLE_HEAD = ["Nama Lengkap", "Username", "Password", "Petugas", "Aksi"];
 
 const TABLE_ROWS = [];
 
-export function TableUsers() {
+export function TableUsers({data}) {
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">

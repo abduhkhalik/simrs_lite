@@ -5,6 +5,7 @@ import {
   ListItem,
   ListItemPrefix,
   Input,
+  Button,
 } from "@material-tailwind/react";
 import {
   PresentationChartBarIcon,
@@ -13,8 +14,15 @@ import {
 } from "@heroicons/react/24/solid";
 import { adminMenu, apotikMenu, gudangMenu } from "../../utils/menuList";
 import { NavLink } from "react-router-dom";
+import React from "react";
+import { Context } from "../../context/Context";
 
 export function DefaultSidebar() {
+  const { dispatch } = React.useContext(Context);
+
+  const handleLogOut = () => {
+    dispatch({ type: "LOGOUT" });
+  };
   return (
     <>
       <Card className="h-screen overflow-y-auto fixed z-20 w-full max-w-[16rem] pb-4 shadow-xl shadow-blue-gray-900/5">
@@ -97,12 +105,14 @@ export function DefaultSidebar() {
               </ListItem>
             </NavLink>
           ))}
-          <ListItem className="hover:bg-slate-400 transition-all ease-in-out rounded-md">
-            <ListItemPrefix>
-              <PowerIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Log Out
-          </ListItem>
+          <Button variant="text" onClick={handleLogOut}>
+            <ListItem className="hover:bg-slate-400 transition-all ease-in-out rounded-md">
+              <ListItemPrefix>
+                <PowerIcon className="h-5 w-5" />
+              </ListItemPrefix>
+              Log Out
+            </ListItem>
+          </Button>
         </List>
       </Card>
     </>
